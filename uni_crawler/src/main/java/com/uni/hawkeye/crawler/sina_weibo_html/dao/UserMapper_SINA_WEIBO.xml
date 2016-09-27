@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uni.hawkeye.crawler.sina_weibo_html.dao.UserMapper_SINA_WEIBO">
+
+	<resultMap id="UserResultMap" type="com.uni.hawkeye.crawler.sina_weibo_html.bean.UserInfo">
+		<id column="user_id" property="user_id" jdbcType="VARCHAR" />
+		<result column="user_nick" property="user_nick" jdbcType="VARCHAR" />
+		<result column="user_area" property="user_area" jdbcType="VARCHAR" />
+		<result column="user_sex" property="user_sex" jdbcType="VARCHAR" />
+		<result column="user_birthday" property="user_birthday" jdbcType="VARCHAR" />
+		<result column="user_blog" property="user_blog" jdbcType="VARCHAR" />
+		<result column="user_blood_type" property="user_blood_type" jdbcType="VARCHAR" />
+		<result column="user_summery" property="user_summery" jdbcType="VARCHAR" />
+		<result column="user_tags" property="user_tags" jdbcType="VARCHAR" />
+		<result column="user_fans_cnt" property="user_fans_cnt" jdbcType="INTEGER" />
+		<result column="user_weibo_cnt" property="user_weibo_cnt" jdbcType="INTEGER" />
+		<result column="user_focus_cnt" property="user_focus_cnt" jdbcType="INTEGER" />
+		<result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
+		<result column="mtime" property="mtime" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<insert id="insertUserInfo" parameterType="com.uni.hawkeye.crawler.sina_weibo_html.bean.UserInfo">
+		
+		INSERT IGNORE INTO weibo_user_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="user_id != null">
+				user_id,
+			</if>
+			<if test="user_nick != null">
+				user_nick,
+			</if>
+			<if test="user_area != null">
+				user_area,
+			</if>
+			<if test="user_sex != null">
+				user_sex,
+			</if>
+			<if test="user_birthday != null">
+				user_birthday,
+			</if>
+			<if test="user_blog != null">
+				user_blog,
+			</if>
+			<if test="user_blood_type != null">
+				user_blood_type,
+			</if>
+			<if test="user_summery != null">
+				user_summery,
+			</if>
+			<if test="user_tags != null">
+				user_tags,
+			</if>
+			<if test="user_fans_cnt != null">
+				user_fans_cnt,
+			</if>
+			<if test="user_weibo_cnt != null">
+				user_weibo_cnt,
+			</if>
+			<if test="user_focus_cnt != null">
+				user_focus_cnt,
+			</if>
+			ctime,
+			mtime
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="user_id != null">
+				#{user_id,jdbcType=VARCHAR},
+			</if>
+			<if test="user_nick != null">
+				#{user_nick,jdbcType=VARCHAR},
+			</if>
+			<if test="user_area != null">
+				#{user_area,jdbcType=VARCHAR},
+			</if>
+			<if test="user_sex != null">
+				#{user_sex,jdbcType=VARCHAR},
+			</if>
+			<if test="user_birthday != null">
+				#{user_birthday,jdbcType=VARCHAR},
+			</if>
+			<if test="user_blog != null">
+				#{user_blog,jdbcType=VARCHAR},
+			</if>
+			<if test="user_blood_type != null">
+				#{user_blood_type,jdbcType=VARCHAR},
+			</if>
+			<if test="user_summery != null">
+				#{user_summery,jdbcType=VARCHAR},
+			</if>
+			<if test="user_tags != null">
+				#{user_tags,jdbcType=VARCHAR},
+			</if>
+			<if test="user_fans_cnt != null">
+				#{user_fans_cnt,jdbcType=INTEGER},
+			</if>
+			<if test="user_weibo_cnt != null">
+				#{user_weibo_cnt,jdbcType=INTEGER},
+			</if>
+			<if test="user_focus_cnt != null">
+				#{user_focus_cnt,jdbcType=INTEGER},
+			</if>
+			now(),
+			now()
+		</trim>
+		ON DUPLICATE KEY UPDATE
+		<if test="user_nick != null">
+			user_nick = #{user_nick,jdbcType=VARCHAR},
+		</if>
+		<if test="user_area != null">
+			user_area = #{user_area,jdbcType=VARCHAR},
+		</if>
+		<if test="user_sex != null">
+			user_sex = #{user_sex,jdbcType=VARCHAR},
+		</if>
+		<if test="user_birthday != null">
+			user_birthday = #{user_birthday,jdbcType=VARCHAR},
+		</if>
+		<if test="user_blog != null">
+			user_blog = #{user_blog,jdbcType=VARCHAR},
+		</if>
+		<if test="user_blood_type != null">
+			user_blood_type = #{user_blood_type,jdbcType=VARCHAR},
+		</if>
+		<if test="user_summery != null">
+			user_summery = #{user_summery,jdbcType=VARCHAR},
+		</if>
+		<if test="user_tags != null">
+			user_tags = #{user_tags,jdbcType=VARCHAR},
+		</if>
+		<if test="user_fans_cnt != null">
+			user_fans_cnt = #{user_fans_cnt,jdbcType=INTEGER},
+		</if>
+		<if test="user_weibo_cnt != null">
+			user_weibo_cnt = #{user_weibo_cnt,jdbcType=INTEGER},
+		</if>
+		<if test="user_focus_cnt != null">
+			user_focus_cnt = #{user_focus_cnt,jdbcType=INTEGER},
+		</if>
+		mtime = now()
+	</insert>
+	
+</mapper>

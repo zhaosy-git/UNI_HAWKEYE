@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uni.hawkeye.crawler.jd.dao.ProductListMapper_JD">
+
+	<resultMap id="ProductListMap" type="com.uni.hawkeye.crawler.jd.bean.ProductList">
+		<id column="product_list_id" property="product_list_id" jdbcType="INTEGER" />
+		<id column="category_id" property="category_id" jdbcType="VARCHAR" />
+		<id column="execute_id" property="execute_id" jdbcType="INTEGER" />
+		<id column="pageNo" property="pageNo" jdbcType="INTEGER" />
+		<id column="priceRange" property="priceRange" jdbcType="VARCHAR" />
+		<result column="url" property="url" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+		<result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
+		<result column="mtime" property="mtime" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<insert id="insertProductList" parameterType="com.uni.hawkeye.crawler.jd.bean.ProductList">
+		INSERT IGNORE INTO jd_product_list 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="category_id != null">
+				category_id,
+			</if>
+			<if test="execute_id != null">
+				execute_id,
+			</if>
+			<if test="pageNo != null">
+				pageNo,
+			</if>
+			<if test="url != null">
+				url,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			mtime,
+			ctime
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="category_id != null">
+				#{category_id,jdbcType=VARCHAR},
+			</if>
+			<if test="execute_id != null">
+				#{execute_id,jdbcType=INTEGER},
+			</if>
+			<if test="pageNo != null">
+				#{pageNo,jdbcType=INTEGER},
+			</if>
+			<if test="url != null">
+				#{url,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			now(),
+			now()
+		</trim>
+		ON DUPLICATE KEY UPDATE
+		<if test="category_id != null">
+			category_id = #{category_id,jdbcType=VARCHAR},
+		</if>
+		<if test="execute_id != null">
+			execute_id = #{execute_id,jdbcType=INTEGER},
+		</if>
+		<if test="pageNo != null">
+			pageNo = #{pageNo,jdbcType=INTEGER},
+		</if>
+		<if test="url != null">
+			url = #{url,jdbcType=VARCHAR},
+		</if>
+		<if test="status != null">
+			status = #{status,jdbcType=INTEGER},
+		</if>
+		mtime = now()
+	</insert>
+	
+	<select id="getProductListByStatus" parameterType="java.util.HashMap" resultMap="ProductListMap">
+		SELECT
+			product_list_id,
+			category_id,
+			execute_id,
+			pageNo,
+			url,
+			STATUS,
+			HOST,
+			ctime,
+			mtime
+		FROM
+			jd_product_list
+		WHERE
+			execute_id = #{executeId,jdbcType=INTEGER}
+		AND STATUS = #{status,jdbcType=VARCHAR}
+		order by ctime
+	</select>
+
+	<insert id="insertProductInfo" parameterType="com.uni.hawkeye.crawler.jd.bean.ProductInfo">
+		INSERT IGNORE INTO jd_product_info 
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				<if test="product_id != null">
+					product_id,
+				</if>
+				<if test="product_title != null">
+					product_title,
+				</if>
+				<if test="price != null">
+					price,
+				</if>
+				<if test="brand_name != null">
+					brand_name,
+				</if>
+				<if test="status != null">
+					status,
+				</if>
+				<if test="product_list_id != null">
+					product_list_id,
+				</if>
+				<if test="url != null">
+					url,
+				</if>
+				<if test="json != null">
+					json,
+				</if>
+				ctime,
+				mtime
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+				<if test="product_id != null">
+					#{product_id,jdbcType=VARCHAR},
+				</if>
+				<if test="product_title != null">
+					#{product_title,jdbcType=VARCHAR},
+				</if>
+				<if test="price != null">
+					#{price,jdbcType=DECIMAL},
+				</if>
+				<if test="brand_name != null">
+					#{brand_name,jdbcType=VARCHAR},
+				</if>
+				<if test="status != null">
+					#{status,jdbcType=INTEGER},
+				</if>
+				<if test="product_list_id != null">
+					#{product_list_id,jdbcType=INTEGER},
+				</if>
+				<if test="url != null">
+					#{url,jdbcType=VARCHAR},
+				</if>
+				<if test="json != null">
+					#{json,jdbcType=VARCHAR},
+				</if>
+				now(),
+				now()
+			</trim>
+			ON DUPLICATE KEY UPDATE
+			<if test="product_title != null">
+				product_title = #{product_title,jdbcType=VARCHAR},
+			</if>
+			<if test="price != null">
+				price = #{price,jdbcType=DECIMAL},
+			</if>
+			<if test="brand_name != null">
+				brand_name = #{brand_name,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="url != null">
+				url = #{url,jdbcType=VARCHAR},
+			</if>
+			<if test="json != null">
+				json = #{json,jdbcType=VARCHAR},
+			</if>
+			mtime = now()
+	</insert>
+	
+	<update id="undateProductList" parameterType="com.uni.hawkeye.crawler.jd.bean.ProductList">
+		update jd_product_list
+		<set>
+			status = #{status,jdbcType=CHAR},
+			mtime = now()
+		</set>
+		where product_list_id = #{product_list_id,jdbcType=INTEGER}
+	</update>
+
+	<insert id="insertReviewInfo" parameterType="com.uni.hawkeye.crawler.jd.bean.ReviewInfo_JD">
+		INSERT IGNORE INTO jd_review_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="product_id_fk != null">
+				product_id_fk,
+			</if>
+			<if test="good_cnt != null">
+				good_cnt,
+			</if>
+			<if test="general_cnt != null">
+				general_cnt,
+			</if>
+			<if test="poor_cnt != null">
+				poor_cnt,
+			</if>
+			<if test="review_grade_avg != null">
+				review_grade_avg,
+			</if>
+			<if test="review_json != null">
+				review_json,
+			</if>
+			<if test="execute_id != null">
+				execute_id,
+			</if>
+			ctime,
+			mtime
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="product_id_fk != null">
+				#{product_id_fk,jdbcType=VARCHAR},
+			</if>
+			<if test="good_cnt != null">
+				#{good_cnt,jdbcType=INTEGER},
+			</if>
+			<if test="general_cnt != null">
+				#{general_cnt,jdbcType=INTEGER},
+			</if>
+			<if test="poor_cnt != null">
+				#{poor_cnt,jdbcType=INTEGER},
+			</if>
+			<if test="review_grade_avg != null">
+				#{review_grade_avg,jdbcType=FLOAT},
+			</if>
+			<if test="review_json != null">
+				#{review_json,jdbcType=VARCHAR},
+			</if>
+			<if test="execute_id != null">
+				#{execute_id,jdbcType=INTEGER},
+			</if>
+			now(),
+			now()
+		</trim>
+		ON DUPLICATE KEY UPDATE
+		<if test="good_cnt != null">
+			good_cnt = #{good_cnt,jdbcType=INTEGER},
+		</if>
+		<if test="general_cnt != null">
+			general_cnt = #{general_cnt,jdbcType=INTEGER},
+		</if>
+		<if test="poor_cnt != null">
+			poor_cnt = #{poor_cnt,jdbcType=INTEGER},
+		</if>
+		<if test="review_grade_avg != null">
+			review_grade_avg = #{review_grade_avg,jdbcType=FLOAT},
+		</if>
+		<if test="review_json != null">
+			review_json = #{review_json,jdbcType=VARCHAR},
+		</if>
+		mtime = now()
+	</insert>
+
+	<insert id="insertReviewImpressionInfo" parameterType="com.uni.hawkeye.crawler.jd.bean.ReviewImpression_JD">
+		INSERT IGNORE INTO jd_review_impression
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="impression_id != null">
+				impression_id,
+			</if>
+			<if test="product_id_fk != null">
+				product_id_fk,
+			</if>
+			<if test="impression_content != null">
+				impression_content,
+			</if>
+			<if test="impression_cnt != null">
+				impression_cnt,
+			</if>
+			<if test="json != null">
+				json,
+			</if>
+			<if test="execute_id != null">
+				execute_id,
+			</if>
+			ctime,
+			mtime
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="impression_id != null">
+				#{impression_id,jdbcType=VARCHAR},
+			</if>
+			<if test="product_id_fk != null">
+				#{product_id_fk,jdbcType=VARCHAR},
+			</if>
+			<if test="impression_content != null">
+				#{impression_content,jdbcType=VARCHAR},
+			</if>
+			<if test="impression_cnt != null">
+				#{impression_cnt,jdbcType=INTEGER},
+			</if>
+			<if test="json != null">
+				#{json,jdbcType=VARCHAR},
+			</if>
+			<if test="execute_id != null">
+				#{execute_id,jdbcType=INTEGER},
+			</if>
+			now(),
+			now()
+		</trim>
+		ON DUPLICATE KEY UPDATE
+		<if test="impression_content != null">
+			impression_content = #{impression_content,jdbcType=VARCHAR},
+		</if>
+		<if test="impression_cnt != null">
+			impression_cnt = #{impression_cnt,jdbcType=INTEGER},
+		</if>
+		<if test="json != null">
+			json = #{json,jdbcType=VARCHAR},
+		</if>
+		mtime = now()
+	</insert>
+
+	<insert id="insertReviewBadInfo" parameterType="com.uni.hawkeye.crawler.jd.bean.ReviewBadInfo_JD">
+		INSERT IGNORE INTO jd_review_bad_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="review_bad_info != null">
+				review_bad_info,
+			</if>
+			<if test="review_bad_time != null">
+				review_bad_time,
+			</if>
+			<if test="product_id_fk != null">
+				product_id_fk,
+			</if>
+			<if test="json != null">
+				json,
+			</if>
+			<if test="execute_id != null">
+				execute_id,
+			</if>
+			ctime,
+			mtime
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="review_bad_info != null">
+				#{review_bad_info,jdbcType=VARCHAR},
+			</if>
+			<if test="review_bad_time != null">
+				#{review_bad_time,jdbcType=TIMESTAMP},
+			</if>
+			<if test="product_id_fk != null">
+				#{product_id_fk,jdbcType=VARCHAR},
+			</if>
+			<if test="json != null">
+				#{json,jdbcType=VARCHAR},
+			</if>
+			<if test="execute_id != null">
+				#{execute_id,jdbcType=INTEGER},
+			</if>
+			now(),
+			now()
+		</trim>
+		ON DUPLICATE KEY UPDATE
+		<if test="review_bad_info != null">
+			review_bad_info = #{review_bad_info,jdbcType=VARCHAR},
+		</if>
+		<if test="review_bad_time != null">
+			review_bad_time = #{review_bad_time,jdbcType=TIMESTAMP},
+		</if>
+		<if test="json != null">
+			json = #{json,jdbcType=VARCHAR},
+		</if>
+		mtime = now()
+	</insert>
+
+
+	<select id="getProductCountByProductListID" parameterType="java.util.HashMap" resultType="INTEGER">
+		SELECT
+			count(1) cnt
+		FROM
+			jd_product_info
+		WHERE
+			product_list_id = #{product_list_id,jdbcType=INTEGER}
+	</select>
+</mapper>

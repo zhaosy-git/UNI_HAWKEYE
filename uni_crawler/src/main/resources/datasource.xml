@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+       http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.1.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+    
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="defaultAutoCommit" value="false">
+		</property>
+		<property name="driverClassName">
+			<value>com.mysql.jdbc.Driver</value>
+		</property>
+		<property name="url">
+			<!-- <value>jdbc:mysql://localhost:3306/uni_hawkeye_crawler?characterEncoding=utf-8</value> -->
+			<!--正式库 <value>jdbc:mysql://117.34.5.224:3306/uni_hawkeye_crawler?characterEncoding=utf-8</value> -->
+			<value>jdbc:mysql://117.34.5.212:3306/uni_hawkeye_crawler?characterEncoding=utf-8</value><!--测试库  -->
+		</property>
+		<property name="username">
+			<!-- <value>root</value> -->
+			<value>dmpuser</value>
+		</property>
+		<property name="password">
+			<!-- <value></value> -->
+			<value>123456</value>
+		</property>
+		<property name="maxActive">
+			<value>100</value>
+		</property>
+	</bean>
+	
+</beans>

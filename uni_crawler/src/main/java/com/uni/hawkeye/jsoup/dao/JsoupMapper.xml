@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uni.hawkeye.jsoup.dao.JsoupMapper">
+
+	<resultMap id="CrawlerPropertyMap" type="com.uni.hawkeye.jsoup.bean.CrawlerPropertyInfo">
+		<id column="cookie_from" property="cookie_from" jdbcType="VARCHAR" />
+		<result column="cookie" property="cookie" jdbcType="VARCHAR" />
+		<result column="token" property="token" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<select id="getJsoupProperty" parameterType="java.util.HashMap" resultMap="CrawlerPropertyMap">
+		SELECT cookie, token
+		  FROM crawler_property 
+		 WHERE cookie_from = #{cookie_from, jdbcType=VARCHAR}
+	</select>
+</mapper>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uni.hawkeye.crawler.sina_weibo_html.dao.SearchMapper_SINA_WEIBO">
+
+	<resultMap id="SearchResultMap" type="com.uni.hawkeye.crawler.sina_weibo_html.bean.SearchInfo">
+		<id column="search_id" property="search_id" jdbcType="INTEGER" />
+		<result column="content_key_word" property="content_key_word" jdbcType="VARCHAR" />
+		<result column="crawler_weibo_begin_time" property="crawler_weibo_begin_time" jdbcType="VARCHAR" />
+		<result column="crawler_weibo_end_time" property="crawler_weibo_end_time" jdbcType="VARCHAR" />
+		<result column="search_url" property="search_url" jdbcType="VARCHAR"/>
+		<result column="status" property="status" jdbcType="CHAR" />
+		<result column="execute_id_fk" property="execute_id_fk" jdbcType="INTEGER" />
+		<result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
+		<result column="mtime" property="mtime" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<insert id="insertSearchInfo" parameterType="com.uni.hawkeye.crawler.sina_weibo_html.bean.SearchInfo">
+		
+		<selectKey resultType="java.lang.Integer" keyProperty="search_id"
+			order="AFTER">
+			SELECT @@IDENTITY
+		</selectKey>
+		
+		INSERT IGNORE INTO weibo_search_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="content_key_word != null">
+				content_key_word,
+			</if>
+			<if test="crawler_weibo_begin_time != null">
+				crawler_weibo_begin_time,
+			</if>
+			<if test="crawler_weibo_end_time != null">
+				crawler_weibo_end_time,
+			</if>
+			<if test="search_url != null">
+				search_url,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="execute_id_fk != null">
+				execute_id_fk,
+			</if>
+			ctime,
+			mtime
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="content_key_word != null">
+				#{content_key_word,jdbcType=VARCHAR},
+			</if>
+			<if test="crawler_weibo_begin_time != null">
+				#{crawler_weibo_begin_time,jdbcType=VARCHAR},
+			</if>
+			<if test="crawler_weibo_end_time != null">
+				#{crawler_weibo_end_time,jdbcType=VARCHAR},
+			</if>
+			<if test="search_url != null">
+				#{search_url,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=CHAR},
+			</if>
+			<if test="execute_id_fk != null">
+				#{execute_id_fk,jdbcType=INTEGER},
+			</if>
+			now(),
+			now()
+		</trim>
+		ON DUPLICATE KEY UPDATE
+		<if test="content_key_word != null">
+			content_key_word = #{content_key_word,jdbcType=VARCHAR},
+		</if>
+		<if test="crawler_weibo_begin_time != null">
+			crawler_weibo_begin_time = #{crawler_weibo_begin_time,jdbcType=VARCHAR},
+		</if>
+		<if test="crawler_weibo_end_time != null">
+			crawler_weibo_end_time = #{crawler_weibo_end_time,jdbcType=VARCHAR},
+		</if>
+		<if test="search_url != null">
+			search_url = #{search_url,jdbcType=VARCHAR},
+		</if>
+		<if test="status != null">
+			status = #{status,jdbcType=CHAR},
+		</if>
+		mtime = now()
+	</insert>
+	
+	<select id="getSearchinfoByByExecuteID" parameterType="java.util.HashMap" resultMap="SearchResultMap">
+		SELECT
+			search_id,
+			content_key_word,
+			crawler_weibo_begin_time,
+			crawler_weibo_end_time,
+			search_url,
+			status,
+			execute_id_fk,
+			ctime,
+			mtime
+		FROM
+			weibo_search_info
+		WHERE
+			execute_id_fk = #{execute_id,jdbcType=INTEGER}
+		ORDER BY ctime
+	</select>
+	
+	<update id="updateSearchInfoStatus" parameterType="java.util.HashMap">
+		update weibo_search_info
+		<set>
+			status = #{status,jdbcType=CHAR},
+			mtime = now()
+		</set>
+		where search_id = #{search_id,jdbcType=INTEGER}
+	</update>
+</mapper>

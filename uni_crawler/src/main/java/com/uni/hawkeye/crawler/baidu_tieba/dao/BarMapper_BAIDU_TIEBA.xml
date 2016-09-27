@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uni.hawkeye.crawler.baidu_tieba.dao.BarMapper_BAIDU_TIEBA">
+
+	<resultMap id="BarResultMap" type="com.uni.hawkeye.crawler.baidu_tieba.bean.BarInfo">
+		<id column="tieba_id" property="tieba_id" jdbcType="VARCHAR" />
+		<result column="tieba_title" property="tieba_title" jdbcType="VARCHAR" />
+		<result column="tieba_user_cnt" property="tieba_user_cnt" jdbcType="INTEGER" />
+		<result column="tieba_tiezi_cnt" property="tieba_tiezi_cnt" jdbcType="INTEGER" />
+		<result column="tieba_summary" property="tieba_summary" jdbcType="VARCHAR" />
+		<result column="tieba_url" property="tieba_url" jdbcType="VARCHAR" />
+		<result column="category_id_fk" property="category_id_fk" jdbcType="INTEGER" />
+		<result column="status" property="status" jdbcType="CHAR" />
+		<result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
+		<result column="mtime" property="mtime" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<insert id="insertBarInfo" parameterType="com.uni.hawkeye.crawler.baidu_tieba.bean.BarInfo">
+		
+		INSERT IGNORE INTO baidu_tieba_bar_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="tieba_title != null">
+				tieba_title,
+			</if>
+			<if test="tieba_user_cnt != null">
+				tieba_user_cnt,
+			</if>
+			<if test="tieba_tiezi_cnt != null">
+				tieba_tiezi_cnt,
+			</if>
+			<if test="tieba_summary != null">
+				tieba_summary,
+			</if>
+			<if test="tieba_url != null">
+				tieba_url,
+			</if>
+			<if test="category_id_fk != null">
+				category_id_fk,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			ctime,
+			mtime
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="tieba_title != null">
+				#{tieba_title,jdbcType=VARCHAR},
+			</if>
+			<if test="tieba_user_cnt != null">
+				#{tieba_user_cnt,jdbcType=INTEGER},
+			</if>
+			<if test="tieba_tiezi_cnt != null">
+				#{tieba_tiezi_cnt,jdbcType=INTEGER},
+			</if>
+			<if test="tieba_summary != null">
+				#{tieba_summary,jdbcType=VARCHAR},
+			</if>
+			<if test="tieba_url != null">
+				#{tieba_url,jdbcType=VARCHAR},
+			</if>
+			<if test="category_id_fk != null">
+				#{category_id_fk,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=CHAR},
+			</if>
+			now(),
+			now()
+		</trim>
+		ON DUPLICATE KEY UPDATE
+			<if test="tieba_title != null">
+				tieba_title = #{tieba_title,jdbcType=VARCHAR},
+			</if>
+			<if test="tieba_user_cnt != null">
+				tieba_user_cnt = #{tieba_user_cnt,jdbcType=INTEGER},
+			</if>
+			<if test="tieba_tiezi_cnt != null">
+				tieba_tiezi_cnt = #{tieba_tiezi_cnt,jdbcType=INTEGER},
+			</if>
+			<if test="tieba_summary != null">
+				tieba_summary = #{tieba_summary,jdbcType=VARCHAR},
+			</if>
+			<if test="tieba_url != null">
+				tieba_url = #{tieba_url,jdbcType=VARCHAR},
+			</if>
+			<if test="category_id_fk != null">
+				category_id_fk = #{category_id_fk,jdbcType=INTEGER},
+			</if>
+		mtime = now()
+	</insert>
+	
+	<select id="getBarInfoByStatus" parameterType="java.util.HashMap" resultMap="BarResultMap">
+		SELECT
+			tieba_id,
+			tieba_title,
+			tieba_user_cnt,
+			tieba_tiezi_cnt,
+			tieba_summary,
+			tieba_url,
+			category_id_fk,
+			status,
+			ctime,
+			mtime
+		FROM
+			baidu_tieba_bar_info
+		WHERE
+			STATUS != #{status,jdbcType=CHAR}
+		<if test="bar_name != null">
+			AND tieba_title like CONCAT('%',#{bar_name,jdbcType=VARCHAR},'%')
+		</if>
+		ORDER BY mtime desc
+	</select>
+	
+	<update id="updateBarInfoStatus" parameterType="java.util.HashMap">
+		update baidu_tieba_bar_info
+		<set>
+			status = #{status,jdbcType=CHAR},
+			mtime = now()
+		</set>
+		where tieba_id = #{tieba_id,jdbcType=INTEGER}
+	</update>
+</mapper>

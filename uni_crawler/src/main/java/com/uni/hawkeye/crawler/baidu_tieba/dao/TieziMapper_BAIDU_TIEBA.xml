@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uni.hawkeye.crawler.baidu_tieba.dao.TieziMapper_BAIDU_TIEBA">
+
+	<resultMap id="TieziResultMap" type="com.uni.hawkeye.crawler.baidu_tieba.bean.TieziInfo">
+		<id column="tiezi_id" property="tiezi_id" jdbcType="VARCHAR" />
+		<result column="tiezi_user_id_fk" property="tiezi_user_id_fk" jdbcType="VARCHAR" />
+		<result column="tiezi_title" property="tiezi_title" jdbcType="VARCHAR" />
+		<result column="tiezi_text" property="tiezi_text" jdbcType="VARCHAR" />
+		<result column="tiezi_floor" property="tiezi_floor" jdbcType="INTEGER" />
+		<result column="tiezi_post_time" property="tiezi_post_time" jdbcType="VARCHAR" />
+		<result column="tiezi_reply_cnt" property="tiezi_reply_cnt" jdbcType="INTEGER" />
+		<result column="tiezi_is_master" property="tiezi_is_master" jdbcType="CHAR" />
+		<result column="tiezi_root_in" property="tiezi_root_in" jdbcType="VARCHAR" />
+		<result column="tiezi_parent_id" property="tiezi_parent_id" jdbcType="VARCHAR" />
+		<result column="tieba_id_fk" property="tieba_id_fk" jdbcType="INTEGER" />
+		<result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
+		<result column="mtime" property="mtime" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<insert id="insertTieziInfo" parameterType="com.uni.hawkeye.crawler.baidu_tieba.bean.TieziInfo">
+		
+		INSERT IGNORE INTO baidu_tieba_tiezi_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="tiezi_id != null">
+				tiezi_id,
+			</if>
+			<if test="tiezi_user_id_fk != null">
+				tiezi_user_id_fk,
+			</if>
+			<if test="tiezi_title != null">
+				tiezi_title,
+			</if>
+			<if test="tiezi_text != null">
+				tiezi_text,
+			</if>
+			<if test="tiezi_floor != null">
+				tiezi_floor,
+			</if>
+			<if test="tiezi_post_time != null">
+				tiezi_post_time,
+			</if>
+			<if test="tiezi_reply_cnt != null">
+				tiezi_reply_cnt,
+			</if>
+			<if test="tiezi_is_master != null">
+				tiezi_is_master,
+			</if>
+			<if test="tiezi_root_in != null">
+				tiezi_root_in,
+			</if>
+			<if test="tiezi_parent_id != null">
+				tiezi_parent_id,
+			</if>
+			<if test="tieba_id_fk != null">
+				tieba_id_fk,
+			</if>
+			ctime,
+			mtime
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="tiezi_id != null">
+				#{tiezi_id,jdbcType=VARCHAR},
+			</if>
+			<if test="tiezi_user_id_fk != null">
+				#{tiezi_user_id_fk,jdbcType=VARCHAR},
+			</if>
+			<if test="tiezi_title != null">
+				#{tiezi_title,jdbcType=VARCHAR},
+			</if>
+			<if test="tiezi_text != null">
+				#{tiezi_text,jdbcType=VARCHAR},
+			</if>
+			<if test="tiezi_floor != null">
+				#{tiezi_floor,jdbcType=INTEGER},
+			</if>
+			<if test="tiezi_post_time != null">
+				#{tiezi_post_time,jdbcType=VARCHAR},
+			</if>
+			<if test="tiezi_reply_cnt != null">
+				#{tiezi_reply_cnt,jdbcType=INTEGER},
+			</if>
+			<if test="tiezi_is_master != null">
+				#{tiezi_is_master,jdbcType=CHAR},
+			</if>
+			<if test="tiezi_root_in != null">
+				#{tiezi_root_in,jdbcType=VARCHAR},
+			</if>
+			<if test="tiezi_parent_id != null">
+				#{tiezi_parent_id,jdbcType=VARCHAR},
+			</if>
+			<if test="tieba_id_fk != null">
+				#{tieba_id_fk,jdbcType=INTEGER},
+			</if>
+			now(),
+			now()
+		</trim>
+		ON DUPLICATE KEY UPDATE
+			<if test="tiezi_user_id_fk != null">
+				tiezi_user_id_fk = #{tiezi_user_id_fk,jdbcType=VARCHAR},
+			</if>
+			<if test="tiezi_title != null">
+				tiezi_title = #{tiezi_title,jdbcType=VARCHAR},
+			</if>
+			<if test="tiezi_text != null">
+				tiezi_text = #{tiezi_text,jdbcType=VARCHAR},
+			</if>
+			<if test="tiezi_floor != null">
+				tiezi_floor = #{tiezi_floor,jdbcType=INTEGER},
+			</if>
+			<if test="tiezi_post_time != null">
+				tiezi_post_time = #{tiezi_post_time,jdbcType=VARCHAR},
+			</if>
+			<if test="tiezi_reply_cnt != null">
+				tiezi_reply_cnt = #{tiezi_reply_cnt,jdbcType=INTEGER},
+			</if>
+			<if test="tiezi_is_master != null">
+				tiezi_is_master = #{tiezi_is_master,jdbcType=CHAR},
+			</if>
+			<if test="tiezi_root_in != null">
+				tiezi_root_in = #{tiezi_root_in,jdbcType=VARCHAR},
+			</if>
+			<if test="tiezi_parent_id != null">
+				tiezi_parent_id = #{tiezi_parent_id,jdbcType=VARCHAR},
+			</if>
+			<if test="tieba_id_fk != null">
+				tieba_id_fk = #{tieba_id_fk,jdbcType=INTEGER},
+			</if>
+		mtime = now()
+	</insert>
+	
+</mapper>

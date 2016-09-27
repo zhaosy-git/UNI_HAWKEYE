@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+	<mappers>
+		<mapper resource="com/uni/hawkeye/crawler/tmall/dao/TaskControlMapper_TMALL.xml" />
+		<mapper resource="com/uni/hawkeye/crawler/tmall/dao/CategoryMapper_TMALL.xml" />
+		<mapper resource="com/uni/hawkeye/crawler/tmall/dao/ProductListMapper_TMALL.xml" />
+		
+		<mapper resource="com/uni/hawkeye/crawler/jd/dao/TaskControlMapper_JD.xml" />
+		<mapper resource="com/uni/hawkeye/crawler/jd/dao/CategoryMapper_JD.xml" />
+		<mapper resource="com/uni/hawkeye/crawler/jd/dao/ProductListMapper_JD.xml" />
+		
+		<mapper resource="com/uni/hawkeye/crawler/suning/dao/TaskControlMapper_SUNING.xml" />
+		<mapper resource="com/uni/hawkeye/crawler/suning/dao/CategoryMapper_SUNING.xml" />
+		<mapper resource="com/uni/hawkeye/crawler/suning/dao/ProductListMapper_SUNING.xml" />
+		
+		<mapper resource="com/uni/hawkeye/crawler/yhd/dao/TaskControlMapper_YHD.xml" />
+		<mapper resource="com/uni/hawkeye/crawler/yhd/dao/CategoryMapper_YHD.xml" />
+		<mapper resource="com/uni/hawkeye/crawler/yhd/dao/ProductListMapper_YHD.xml" />
+		
+		<mapper resource="com/uni/hawkeye/crawler/womai/dao/TaskControlMapper_WOMAI.xml" />
+		<mapper resource="com/uni/hawkeye/crawler/womai/dao/CategoryMapper_WOMAI.xml" />
+		<mapper resource="com/uni/hawkeye/crawler/womai/dao/ProductListMapper_WOMAI.xml" />
+		
+		<mapper resource="com/uni/hawkeye/crawler/gome/dao/TaskControlMapper_GOME.xml" />
+		<mapper resource="com/uni/hawkeye/crawler/gome/dao/CategoryMapper_GOME.xml" />
+		<mapper resource="com/uni/hawkeye/crawler/gome/dao/ProductListMapper_GOME.xml" />
+		
+		<mapper resource="com/uni/hawkeye/crawler/amazon/dao/TaskControlMapper_AMAZON.xml" />
+		<mapper resource="com/uni/hawkeye/crawler/amazon/dao/CategoryMapper_AMAZON.xml" />
+		<mapper resource="com/uni/hawkeye/crawler/amazon/dao/ProductListMapper_AMAZON.xml" />
+		
+		<mapper resource="com/uni/hawkeye/crawler/womai_phone/dao/TaskControlMapper_WOMAI_PHONE.xml" />
+		<mapper resource="com/uni/hawkeye/crawler/womai_phone/dao/CategoryMapper_WOMAI_PHONE.xml" />
+		<mapper resource="com/uni/hawkeye/crawler/womai_phone/dao/ProductListMapper_WOMAI_PHONE.xml" />
+		
+		<mapper resource="com/uni/hawkeye/crawler/baidu_tieba/dao/TaskControlMapper_BAIDU_TIEBA.xml" />
+		<mapper resource="com/uni/hawkeye/crawler/baidu_tieba/dao/CategoryMapper_BAIDU_TIEBA.xml" />
+		<mapper resource="com/uni/hawkeye/crawler/baidu_tieba/dao/BarMapper_BAIDU_TIEBA.xml" />
+		<mapper resource="com/uni/hawkeye/crawler/baidu_tieba/dao/TieziMapper_BAIDU_TIEBA.xml" />
+		<mapper resource="com/uni/hawkeye/crawler/baidu_tieba/dao/UserMapper_BAIDU_TIEBA.xml" />
+		
+		<mapper resource="com/uni/hawkeye/crawler/sina_weibo_html/dao/TaskControlMapper_SINA_WEIBO.xml" />
+		<mapper resource="com/uni/hawkeye/crawler/sina_weibo_html/dao/CategoryMapper_SINA_WEIBO.xml" />
+		<mapper resource="com/uni/hawkeye/crawler/sina_weibo_html/dao/BlockMapper_SINA_WEIBO.xml" />
+		<mapper resource="com/uni/hawkeye/crawler/sina_weibo_html/dao/UserMapper_SINA_WEIBO.xml" />
+		<mapper resource="com/uni/hawkeye/crawler/sina_weibo_html/dao/UserAttentionMapper_SINA_WEIBO.xml" />
+		<mapper resource="com/uni/hawkeye/crawler/sina_weibo_html/dao/CommentMapper_SINA_WEIBO.xml" />
+		<mapper resource="com/uni/hawkeye/crawler/sina_weibo_html/dao/SearchMapper_SINA_WEIBO.xml" />
+		
+		<mapper resource="com/uni/hawkeye/crawler/sina_weibo_api/dao/TaskControlMapper_SINA_WEIBO_API.xml" />
+		<mapper resource="com/uni/hawkeye/crawler/sina_weibo_api/dao/CategoryMapper_SINA_WEIBO_API.xml" />
+		
+		<mapper resource="com/uni/hawkeye/crawler/custom/dao/TaskControlMapper_Custom.xml" />
+		
+		<mapper resource="com/uni/hawkeye/proxy/dao/ProxyMapper.xml" />
+		
+		<mapper resource="com/uni/hawkeye/jsoup/dao/JsoupMapper.xml" />
+	</mappers>
+
+</configuration>

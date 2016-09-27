@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+       http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.1.xsd
+       http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-util-3.1.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+	<bean name="tmall_controlLogic" class="com.uni.hawkeye.crawler.tmall.logic.impl.ControlLogicImpl">
+		<property name="site_code" value="${tmall_site_code}"></property>
+		<property name="persistenceLogic" ref="tmall_persistenceLogic"></property>
+		<property name="crawlerLogic" ref="tmall_crawlerLogic"></property>
+	</bean>
+	<bean name="tmall_crawlerLogic" class="com.uni.hawkeye.crawler.tmall.logic.impl.CrawlerLogicImpl">
+		<property name="persistenceLogic" ref="tmall_persistenceLogic"/>
+		<property name="referrer" value="${referrer}"></property>
+		
+		<property name="html_list_navigation" value="${html_list_navigation}"></property>
+		<property name="html_list_last_page" value="${html_list_last_page}"></property>
+		<property name="html_list_product_block" value="${html_list_product_block}"></property>
+		<property name="html_list_product_title" value="${html_list_product_title}"></property>
+		<property name="html_list_way_type" value="${html_list_way_type}"></property>
+		<property name="html_detail_url_pattern_change" value="${html_detail_url_pattern_change}"></property>
+		<property name="html_detail_url_pattern_change_result" value="${html_detail_url_pattern_change_result}"></property>
+		<property name="html_detail_request_url" value="${html_detail_request_url}"></property>
+		<property name="html_detail_brand" value="${html_detail_brand}"></property>
+		<property name="html_detail_brand_pattern" value="${html_detail_brand_pattern}"></property>
+		<property name="html_review_request_url" value="${html_review_request_url}"></property>
+		<property name="html_review_grade_avg_url" value="${html_review_grade_avg_url}"></property>
+		<property name="html_product_impression_url" value="${html_product_impression_url}"></property>
+	</bean>
+	<bean name="tmall_persistenceLogic" class="com.uni.hawkeye.crawler.tmall.logic.impl.PersistenceLogicImpl">
+	</bean>
+
+	<bean name="jd_controlLogic" class="com.uni.hawkeye.crawler.jd.logic.impl.ControlLogicImpl">
+		<property name="site_code" value="${jd_site_code}"></property>
+		<property name="persistenceLogic" ref="jd_persistenceLogic"></property>
+		<property name="crawlerLogic" ref="jd_crawlerLogic"></property>
+	</bean>
+	<bean name="jd_crawlerLogic" class="com.uni.hawkeye.crawler.jd.logic.impl.CrawlerLogicImpl">
+		<property name="persistenceLogic" ref="jd_persistenceLogic"/>
+		<property name="html_category_navigation" value="${jd_html_category_navigation}"></property>
+		<property name="html_category_level_1" value="${jd_html_category_level_1}"></property>
+		<property name="html_category_level_2" value="${jd_html_category_level_2}"></property>
+		<property name="html_category_level_3" value="${jd_html_category_level_3}"></property>
+		<property name="html_list_last_page" value="${jd_html_list_last_page}"></property>
+		<property name="html_list_product_detail_url" value="${jd_html_list_product_detail_url}"></property>
+		<property name="html_detail_title" value="${jd_html_detail_title}"></property>
+		<property name="html_detail_price_json_url" value="${jd_html_detail_price_json_url}"></property>
+		<property name="html_detail_brand" value="${jd_html_detail_brand}"></property>
+		<property name="html_review_info_json_url" value="${jd_html_review_info_json_url}"></property>
+	</bean>
+	<bean name="jd_persistenceLogic" class="com.uni.hawkeye.crawler.jd.logic.impl.PersistenceLogicImpl">
+	</bean>
+	
+	<bean name="suning_controlLogic" class="com.uni.hawkeye.crawler.suning.logic.impl.ControlLogicImpl">
+		<property name="site_code" value="${suning_site_code}"></property>
+		<property name="persistenceLogic" ref="suning_persistenceLogic"></property>
+		<property name="crawlerLogic" ref="suning_crawlerLogic"></property>
+	</bean>
+	<bean name="suning_crawlerLogic" class="com.uni.hawkeye.crawler.suning.logic.impl.CrawlerLogicImpl">
+		<property name="persistenceLogic" ref="suning_persistenceLogic"/>
+		
+		<property name="html_list_navigation_path" value="${suning_html_list_navigation_path}"></property>
+		<property name="html_list_navigation_current" value="${suning_html_list_navigation_current}"></property>
+		<property name="html_list_last_page" value="${suning_html_list_last_page}"></property>
+		<property name="html_list_product_block" value="${suning_html_list_product_block}"></property>
+		<property name="html_list_title" value="${suning_html_list_title}"></property>
+		
+		<property name="html_detail_title" value="${suning_html_detail_title}"></property>
+		<property name="html_detail_brand" value="${suning_html_detail_brand}"></property>
+		<property name="html_detail_price_json" value="${suning_html_detail_price_json}"></property>
+		<property name="html_detail_impression" value="${suning_html_detail_impression}"></property>
+		<property name="html_detail_review_info" value="${suning_html_detail_review_info}"></property>
+		<property name="html_detail_bad_review_info" value="${suning_html_detail_bad_review_info}"></property>
+	</bean>
+	<bean name="suning_persistenceLogic" class="com.uni.hawkeye.crawler.suning.logic.impl.PersistenceLogicImpl">
+	</bean>
+	
+	<bean name="yhd_controlLogic" class="com.uni.hawkeye.crawler.yhd.logic.impl.ControlLogicImpl">
+		<property name="site_code" value="${yhd_site_code}"></property>
+		<property name="persistenceLogic" ref="yhd_persistenceLogic"></property>
+		<property name="crawlerLogic" ref="yhd_crawlerLogic"></property>
+	</bean>
+	<bean name="yhd_crawlerLogic" class="com.uni.hawkeye.crawler.yhd.logic.impl.CrawlerLogicImpl">
+		<property name="persistenceLogic" ref="yhd_persistenceLogic"/>
+		<property name="html_category_navigation" value="${yhd_html_category_navigation}"></property>
+		<property name="html_category_level_1" value="${yhd_html_category_level_1}"></property>
+		<property name="html_category_level_2" value="${yhd_html_category_level_2}"></property>
+		<property name="html_category_level_3" value="${yhd_html_category_level_3}"></property>
+		
+		<property name="html_list_last_page" value="${yhd_html_list_last_page}"></property>
+		<property name="html_list_last_page_1" value="${yhd_html_list_last_page_1}"></property>
+		<property name="html_list_product_id" value="${yhd_html_list_product_id}"></property>
+		<property name="html_list_product_detail_url" value="${yhd_html_list_product_detail_url}"></property>
+		<property name="html_detail_id" value="${yhd_html_detail_id}"></property>
+		<property name="html_detail_title" value="${yhd_html_detail_title}"></property>
+		<property name="html_detail_title_1" value="${yhd_html_detail_title_1}"></property>
+		<property name="html_detail_brand" value="${yhd_html_detail_brand}"></property>
+		<property name="html_detail_price_json_url" value="${yhd_html_detail_price_json_url}"></property>
+		<property name="html_detail_sale_count" value="${yhd_html_detail_sale_count}"></property>
+		<property name="html_detail_impression_json" value="${yhd_html_detail_impression_json}"></property>
+		<property name="html_detail_good_review_avg" value="${yhd_html_detail_good_review_avg}"></property>
+		<property name="html_detail_review" value="${yhd_html_detail_review}"></property>
+		<property name="html_detail_bad_review" value="${yhd_html_detail_bad_review}"></property>
+	</bean>
+	<bean name="yhd_persistenceLogic" class="com.uni.hawkeye.crawler.yhd.logic.impl.PersistenceLogicImpl">
+	</bean>
+	
+	<bean name="womai_controlLogic" class="com.uni.hawkeye.crawler.womai.logic.impl.ControlLogicImpl">
+		<property name="site_code" value="${womai_site_code}"></property>
+		<property name="persistenceLogic" ref="womai_persistenceLogic"></property>
+		<property name="crawlerLogic" ref="womai_crawlerLogic"></property>
+	</bean>
+	<bean name="womai_crawlerLogic" class="com.uni.hawkeye.crawler.womai.logic.impl.CrawlerLogicImpl">
+		<property name="persistenceLogic" ref="womai_persistenceLogic"/>
+		
+		<property name="html_category_navigation" value="${womai_html_category_navigation}"></property>
+		<property name="html_base_url" value="${womai_html_base_url}"></property>
+		
+		<property name="html_list_last_page" value="${womai_html_list_last_page}"></property>
+		<property name="html_list_product_block" value="${womai_html_list_product_block}"></property>
+		<property name="html_list_product_a" value="${womai_html_list_product_a}"></property>
+		<property name="html_list_title" value="${womai_html_list_title}"></property>
+		
+		<property name="html_detail_title" value="${womai_html_detail_title}"></property>
+		<property name="html_detail_price_json" value="${womai_html_detail_price_json}"></property>
+		<property name="html_detail_brand" value="${womai_html_detail_brand}"></property>
+		<property name="html_detail_brand_1" value="${womai_html_detail_brand_1}"></property>
+		<property name="html_detail_brand_2" value="${womai_html_detail_brand_2}"></property>
+		<property name="html_detail_grade_avg" value="${womai_html_detail_grade_avg}"></property>
+		<property name="html_detail_grade_r3" value="${womai_html_detail_grade_r3}"></property>
+		<property name="html_detail_grade_r2" value="${womai_html_detail_grade_r2}"></property>
+		<property name="html_detail_grade_r1" value="${womai_html_detail_grade_r1}"></property>
+		<property name="html_detail_impression_contents" value="${womai_html_detail_impression_contents}"></property>
+		<property name="html_detail_impression_contents_avg" value="${womai_html_detail_impression_contents_avg}"></property>
+		<property name="html_detail_bad_review_info_url" value="${womai_html_detail_bad_review_info_url}"></property>
+		<property name="html_detail_bad_review_content" value="${womai_html_detail_bad_review_content}"></property>
+		<property name="html_detail_bad_review_time" value="${womai_html_detail_bad_review_time}"></property>
+	</bean>
+	<bean name="womai_persistenceLogic" class="com.uni.hawkeye.crawler.womai.logic.impl.PersistenceLogicImpl">
+	</bean>
+	
+	<bean name="womai_phone_controlLogic" class="com.uni.hawkeye.crawler.womai_phone.logic.impl.ControlLogicImpl">
+		<property name="site_code" value="${womai_phone_site_code}"></property>
+		<property name="persistenceLogic" ref="womai_phone_persistenceLogic"></property>
+		<property name="crawlerLogic" ref="womai_phone_crawlerLogic"></property>
+	</bean>
+	<bean name="womai_phone_crawlerLogic" class="com.uni.hawkeye.crawler.womai_phone.logic.impl.CrawlerLogicImpl">
+		<property name="persistenceLogic" ref="womai_phone_persistenceLogic"/>
+		<property name="womai_phone_category_name" value="${womai_phone_category_name}"></property>
+		<property name="womai_phone_html_list_last_page" value="${womai_phone_html_list_last_page}"></property>
+		<property name="womai_phone_html_list_block" value="${womai_phone_html_list_block}"></property>
+		<property name="womai_phone_html_product_href" value="${womai_phone_html_product_href}"></property>
+		<property name="womai_phone_detail_title" value="${womai_phone_detail_title}"></property>
+		<property name="womai_phone_detail_price" value="${womai_phone_detail_price}"></property>
+		<property name="womai_phone_detail_price_type" value="${womai_phone_detail_price_type}"></property>
+		<property name="womai_phone_detail_brand" value="${womai_phone_detail_brand}"></property>
+		<property name="womai_phone_detail_brand_1" value="${womai_phone_detail_brand_1}"></property>
+		<property name="womai_phone_detail_jump_url" value="${womai_phone_detail_jump_url}"></property>
+		<property name="womai_phone_detail_review_url" value="${womai_phone_detail_review_url}"></property>
+		<property name="womai_phone_detail_review_referer" value="${womai_phone_detail_review_referer}"></property>
+	</bean>
+	<bean name="womai_phone_persistenceLogic" class="com.uni.hawkeye.crawler.womai_phone.logic.impl.PersistenceLogicImpl">
+	</bean>
+	
+	<bean name="gome_controlLogic" class="com.uni.hawkeye.crawler.gome.logic.impl.ControlLogicImpl">
+		<property name="site_code" value="${gome_site_code}"></property>
+		<property name="persistenceLogic" ref="gome_persistenceLogic"></property>
+		<property name="crawlerLogic" ref="gome_crawlerLogic"></property>
+	</bean>
+	<bean name="gome_crawlerLogic" class="com.uni.hawkeye.crawler.gome.logic.impl.CrawlerLogicImpl">
+		<property name="persistenceLogic" ref="gome_persistenceLogic"/>
+		
+		<property name="html_list_category_1" value="${gome_html_list_category_1}"></property>
+		<property name="html_list_category_2" value="${gome_html_list_category_2}"></property>
+		<property name="html_list_category_3" value="${gome_html_list_category_3}"></property>
+		<property name="html_list_last_page" value="${gome_html_list_last_page}"></property>
+		<property name="html_list_product_block" value="${gome_html_list_product_block}"></property>
+		<property name="html_list_product_a" value="${gome_html_list_product_a}"></property>
+		<property name="html_detail_title" value="${gome_html_detail_title}"></property>
+		<property name="html_detail_brand" value="${gome_html_detail_brand}"></property>
+		<property name="html_detail_price_json_url" value="${gome_html_detail_price_json_url}"></property>
+		<property name="html_detail_review_json_url" value="${gome_html_detail_review_json_url}"></property>
+		<property name="html_detail_good_avg" value="${gome_html_detail_good_avg}"></property>
+		<property name="html_detail_impression_url" value="${gome_html_detail_impression_url}"></property>
+		<property name="html_detail_bad_review_url" value="${gome_html_detail_bad_review_url}"></property>
+	</bean>
+	<bean name="gome_persistenceLogic" class="com.uni.hawkeye.crawler.gome.logic.impl.PersistenceLogicImpl">
+	</bean>
+	
+	<bean name="amazon_controlLogic" class="com.uni.hawkeye.crawler.amazon.logic.impl.ControlLogicImpl">
+		<property name="site_code" value="${amazon_site_code}"></property>
+		<property name="persistenceLogic" ref="amazon_persistenceLogic"></property>
+		<property name="crawlerLogic" ref="amazon_crawlerLogic"></property>
+	</bean>
+	<bean name="amazon_crawlerLogic" class="com.uni.hawkeye.crawler.amazon.logic.impl.CrawlerLogicImpl">
+		<property name="persistenceLogic" ref="amazon_persistenceLogic"/>
+		
+		<property name="html_list_navigation_before" value="${amazon_html_list_navigation_before}"></property>
+		<property name="html_list_navigation_current" value="${amazon_html_list_navigation_current}"></property>
+		<property name="html_list_last_page" value="${amazon_html_list_last_page}"></property>
+		<property name="html_list_product_block" value="${amazon_html_list_product_block}"></property>
+		<property name="html_list_title" value="${amazon_html_list_title}"></property>
+		<property name="html_list_brand" value="${amazon_html_list_brand}"></property>
+		<property name="html_list_price" value="${amazon_html_list_price}"></property>
+		<property name="html_list_review_url" value="${amazon_html_list_review_url}"></property>
+		<property name="html_list_review_avg" value="${amazon_html_list_review_avg}"></property>
+		<property name="html_list_review_count" value="${amazon_html_list_review_count}"></property>
+		<property name="html_review_page_url" value="${amazon_html_review_page_url}"></property>
+		<property name="html_impression_url" value="${amazon_html_impression_url}"></property>
+		<property name="html_impression_block" value="${amazon_html_impression_block}"></property>
+		<property name="html_impression_title" value="${amazon_html_impression_title}"></property>
+		<property name="html_impression_count" value="${amazon_html_impression_count}"></property>
+		<property name="html_bad_review_content" value="${amazon_html_bad_review_content}"></property>
+		<property name="html_bad_review_time" value="${amazon_html_bad_review_time}"></property>
+	</bean>
+	<bean name="amazon_persistenceLogic" class="com.uni.hawkeye.crawler.amazon.logic.impl.PersistenceLogicImpl">
+	</bean>
+	
+	<bean name="JsoupCrawler" class="com.uni.hawkeye.jsoup.JsoupCrawler">
+		<property name="retry_cnt" value="${retry_cnt}"></property>
+		<property name="sleep_time" value="${sleep_time}"></property>
+		<property name="time_out" value="${time_out}"></property>
+		<property name="userAgent" value="${userAgent}"></property>
+		<property name="cookie" value="${cookie}"></property>
+	</bean>
+</beans>

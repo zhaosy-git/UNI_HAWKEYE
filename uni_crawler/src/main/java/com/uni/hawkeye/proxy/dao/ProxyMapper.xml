@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uni.hawkeye.proxy.dao.ProxyMapper">
+
+	<resultMap id="uniProxyInfoMap" type="com.uni.hawkeye.proxy.bean.UniProxyInfo">
+		<result column="ip" property="ip" jdbcType="VARCHAR" />
+		<result column="port" property="port" jdbcType="VARCHAR" />
+		<result column="site_code" property="site_code" jdbcType="VARCHAR" />
+		<result column="expire" property="expire" jdbcType="CHAR" />
+		<result column="do_flag" property="do_flag" jdbcType="CHAR" />
+		<result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
+		<result column="mtime" property="mtime" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<select id="getUniProxyInfo" parameterType="java.util.HashMap" resultMap="uniProxyInfoMap">
+		SELECT
+				ip,
+				PORT,
+				site_code,
+				expire,
+				do_flag,
+				ctime,
+				mtime
+		FROM	uni_proxy
+		WHERE site_code LIKE CONCAT('%',#{site_code,jdbcType=VARCHAR},'%' )
+		  AND do_flag = #{do_flag,jdbcType=CHAR} 
+		  AND expire = #{expire,jdbcType=CHAR}
+		ORDER BY mtime DESC
+		limit 1
+	</select>
+	
+	<update id="updateUniProxyInfo" parameterType="com.uni.hawkeye.proxy.bean.UniProxyInfo">
+		update uni_proxy
+		<set>
+			do_flag = #{do_flag,jdbcType=CHAR},
+			expire = #{expire,jdbcType=CHAR},
+			mtime = now()
+		</set>
+		where ip = #{ip,jdbcType=VARCHAR}
+		  and port = #{port,jdbcType=VARCHAR}
+	</update>
+</mapper>

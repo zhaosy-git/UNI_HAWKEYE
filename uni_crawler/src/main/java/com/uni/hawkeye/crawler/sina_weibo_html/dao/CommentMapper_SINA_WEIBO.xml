@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uni.hawkeye.crawler.sina_weibo_html.dao.CommentMapper_SINA_WEIBO">
+
+	<resultMap id="CommentResultMap" type="com.uni.hawkeye.crawler.sina_weibo_html.bean.CommentInfo">
+		<id column="comment_id" property="comment_id" jdbcType="VARCHAR" />
+		<result column="weibo_block_id_fk" property="weibo_block_id_fk" jdbcType="INTEGER" />
+		<result column="comment_text" property="comment_text" jdbcType="VARCHAR" />
+		<result column="comment_favour_cnt" property="comment_favour_cnt" jdbcType="INTEGER" />
+		<result column="comment_user_id_fk" property="comment_user_id_fk" jdbcType="VARCHAR" />
+		<result column="comment_post_time" property="comment_post_time" jdbcType="VARCHAR" />
+		<result column="comment_at_username" property="comment_at_username" jdbcType="VARCHAR" />
+		<result column="comment_topic" property="comment_topic" jdbcType="VARCHAR" />
+		<result column="comment_is_original" property="comment_is_original" jdbcType="VARCHAR" />
+		<result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
+		<result column="mtime" property="mtime" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<insert id="insertCommentInfo" parameterType="com.uni.hawkeye.crawler.sina_weibo_html.bean.CommentInfo">
+		
+		INSERT IGNORE INTO weibo_comment_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="comment_id != null">
+				comment_id,
+			</if>
+			<if test="weibo_block_id_fk != null">
+				weibo_block_id_fk,
+			</if>
+			<if test="comment_text != null">
+				comment_text,
+			</if>
+			<if test="comment_favour_cnt != null">
+				comment_favour_cnt,
+			</if>
+			<if test="comment_user_id_fk != null">
+				comment_user_id_fk,
+			</if>
+			<if test="comment_post_time != null">
+				comment_post_time,
+			</if>
+			<if test="comment_at_username != null">
+				comment_at_username,
+			</if>
+			<if test="comment_topic != null">
+				comment_topic,
+			</if>
+			<if test="comment_is_original != null">
+				comment_is_original,
+			</if>
+			ctime,
+			mtime
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="comment_id != null">
+				#{comment_id,jdbcType=VARCHAR},
+			</if>
+			<if test="weibo_block_id_fk != null">
+				#{weibo_block_id_fk,jdbcType=INTEGER},
+			</if>
+			<if test="comment_text != null">
+				#{comment_text,jdbcType=VARCHAR},
+			</if>
+			<if test="comment_favour_cnt != null">
+				#{comment_favour_cnt,jdbcType=INTEGER},
+			</if>
+			<if test="comment_user_id_fk != null">
+				#{comment_user_id_fk,jdbcType=VARCHAR},
+			</if>
+			<if test="comment_post_time != null">
+				#{comment_post_time,jdbcType=VARCHAR},
+			</if>
+			<if test="comment_at_username != null">
+				#{comment_at_username,jdbcType=VARCHAR},
+			</if>
+			<if test="comment_topic != null">
+				#{comment_topic,jdbcType=VARCHAR},
+			</if>
+			<if test="comment_is_original != null">
+				#{comment_is_original,jdbcType=VARCHAR},
+			</if>
+			now(),
+			now()
+		</trim>
+		ON DUPLICATE KEY UPDATE
+		<if test="weibo_block_id_fk != null">
+			weibo_block_id_fk = #{weibo_block_id_fk,jdbcType=INTEGER},
+		</if>
+		<if test="comment_text != null">
+			comment_text = #{comment_text,jdbcType=VARCHAR},
+		</if>
+		<if test="comment_favour_cnt != null">
+			comment_favour_cnt = #{comment_favour_cnt,jdbcType=INTEGER},
+		</if>
+		<if test="comment_user_id_fk != null">
+			comment_user_id_fk = #{comment_user_id_fk,jdbcType=VARCHAR},
+		</if>
+		<if test="comment_post_time != null">
+			comment_post_time = #{comment_post_time,jdbcType=VARCHAR},
+		</if>
+		<if test="comment_at_username != null">
+			comment_at_username = #{comment_at_username,jdbcType=VARCHAR},
+		</if>
+		<if test="comment_topic != null">
+			comment_topic = #{comment_topic,jdbcType=VARCHAR},
+		</if>
+		<if test="comment_is_original != null">
+			comment_is_original = #{comment_is_original,jdbcType=VARCHAR},
+		</if>
+		mtime = now()
+	</insert>
+	
+</mapper>

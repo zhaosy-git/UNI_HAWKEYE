@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uni.hawkeye.crawler.sina_weibo_html.dao.BlockMapper_SINA_WEIBO">
+
+	<resultMap id="BlockResultMap" type="com.uni.hawkeye.crawler.sina_weibo_html.bean.BlockInfo">
+		<id column="block_id" property="block_id" jdbcType="INTEGER" />
+		<result column="weibo_category_id_fk" property="weibo_category_id_fk" jdbcType="INTEGER" />
+		<result column="weibo_search_id_fk" property="weibo_search_id_fk" jdbcType="INTEGER" />
+		<result column="block_title" property="block_title" jdbcType="VARCHAR" />
+		<result column="block_text" property="block_text" jdbcType="VARCHAR" />
+		<result column="block_post_time" property="block_post_time" jdbcType="VARCHAR" />
+		<result column="block_weibo_url" property="block_weibo_url" jdbcType="VARCHAR" />
+		<result column="block_root_in" property="block_root_in" jdbcType="VARCHAR" />
+		<result column="block_user_id_fk" property="block_user_id_fk" jdbcType="VARCHAR" />
+		<result column="block_repost_cnt" property="block_repost_cnt" jdbcType="INTEGER" />
+		<result column="block_comment_cnt" property="block_comment_cnt" jdbcType="INTEGER" />
+		<result column="block_favour_cnt" property="block_favour_cnt" jdbcType="INTEGER" />
+		<result column="parent_block_weibo_url" property="parent_block_weibo_url" jdbcType="VARCHAR" />
+		<result column="block_at_username" property="block_at_username" jdbcType="VARCHAR" />
+		<result column="block_topic" property="block_topic" jdbcType="VARCHAR" />
+		<result column="block_is_original" property="block_is_original" jdbcType="CHAR" />
+		<result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
+		<result column="mtime" property="mtime" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<insert id="insertBlockInfo" parameterType="com.uni.hawkeye.crawler.sina_weibo_html.bean.BlockInfo">
+		
+		<selectKey resultType="java.lang.Integer" keyProperty="block_id"
+			order="AFTER">
+			SELECT @@IDENTITY
+		</selectKey>
+		
+		INSERT IGNORE INTO weibo_block_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="weibo_category_id_fk != null">
+				weibo_category_id_fk,
+			</if>
+			<if test="weibo_search_id_fk != null">
+				weibo_search_id_fk,
+			</if>
+			<if test="block_title != null">
+				block_title,
+			</if>
+			<if test="block_text != null">
+				block_text,
+			</if>
+			<if test="block_post_time != null">
+				block_post_time,
+			</if>
+			<if test="block_weibo_url != null">
+				block_weibo_url,
+			</if>
+			<if test="block_root_in != null">
+				block_root_in,
+			</if>
+			<if test="block_user_id_fk != null">
+				block_user_id_fk,
+			</if>
+			<if test="block_repost_cnt != null">
+				block_repost_cnt,
+			</if>
+			<if test="block_comment_cnt != null">
+				block_comment_cnt,
+			</if>
+			<if test="block_favour_cnt != null">
+				block_favour_cnt,
+			</if>
+			<if test="parent_block_weibo_url != null">
+				parent_block_weibo_url,
+			</if>
+			<if test="block_at_username != null">
+				block_at_username,
+			</if>
+			<if test="block_topic != null">
+				block_topic,
+			</if>
+			<if test="block_is_original != null">
+				block_is_original,
+			</if>
+			ctime,
+			mtime
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="weibo_category_id_fk != null">
+				#{weibo_category_id_fk,jdbcType=INTEGER},
+			</if>
+			<if test="weibo_search_id_fk != null">
+				#{weibo_search_id_fk,jdbcType=INTEGER},
+			</if>
+			<if test="block_title != null">
+				#{block_title,jdbcType=VARCHAR},
+			</if>
+			<if test="block_text != null">
+				#{block_text,jdbcType=VARCHAR},
+			</if>
+			<if test="block_post_time != null">
+				#{block_post_time,jdbcType=VARCHAR},
+			</if>
+			<if test="block_weibo_url != null">
+				#{block_weibo_url,jdbcType=VARCHAR},
+			</if>
+			<if test="block_root_in != null">
+				#{block_root_in,jdbcType=VARCHAR},
+			</if>
+			<if test="block_user_id_fk != null">
+				#{block_user_id_fk,jdbcType=VARCHAR},
+			</if>
+			<if test="block_repost_cnt != null">
+				#{block_repost_cnt,jdbcType=INTEGER},
+			</if>
+			<if test="block_comment_cnt != null">
+				#{block_comment_cnt,jdbcType=INTEGER},
+			</if>
+			<if test="block_favour_cnt != null">
+				#{block_favour_cnt,jdbcType=INTEGER},
+			</if>
+			<if test="parent_block_weibo_url != null">
+				#{parent_block_weibo_url,jdbcType=VARCHAR},
+			</if>
+			<if test="block_at_username != null">
+				#{block_at_username,jdbcType=VARCHAR},
+			</if>
+			<if test="block_topic != null">
+				#{block_topic,jdbcType=VARCHAR},
+			</if>
+			<if test="block_is_original != null">
+				#{block_is_original,jdbcType=CHAR},
+			</if>
+			now(),
+			now()
+		</trim>
+		ON DUPLICATE KEY UPDATE
+		<if test="weibo_category_id_fk != null">
+			weibo_category_id_fk = #{weibo_category_id_fk,jdbcType=INTEGER},
+		</if>
+		<if test="weibo_search_id_fk != null">
+			weibo_search_id_fk = #{weibo_search_id_fk,jdbcType=INTEGER},
+		</if>
+		<if test="block_title != null">
+			block_title = #{block_title,jdbcType=VARCHAR},
+		</if>
+		<if test="block_text != null">
+			block_text = #{block_text,jdbcType=VARCHAR},
+		</if>
+		<if test="block_post_time != null">
+			block_post_time = #{block_post_time,jdbcType=VARCHAR},
+		</if>
+		<if test="block_weibo_url != null">
+			block_weibo_url = #{block_weibo_url,jdbcType=VARCHAR},
+		</if>
+		<if test="block_root_in != null">
+			block_root_in = #{block_root_in,jdbcType=VARCHAR},
+		</if>
+		<if test="block_user_id_fk != null">
+			block_user_id_fk = #{block_user_id_fk,jdbcType=VARCHAR},
+		</if>
+		<if test="block_repost_cnt != null">
+			block_repost_cnt = #{block_repost_cnt,jdbcType=INTEGER},
+		</if>
+		<if test="block_comment_cnt != null">
+			block_comment_cnt = #{block_comment_cnt,jdbcType=INTEGER},
+		</if>
+		<if test="block_favour_cnt != null">
+			block_favour_cnt = #{block_favour_cnt,jdbcType=INTEGER},
+		</if>
+		<if test="parent_block_weibo_url != null">
+			parent_block_weibo_url = #{parent_block_weibo_url,jdbcType=VARCHAR},
+		</if>
+		<if test="block_at_username != null">
+			block_at_username = #{block_at_username,jdbcType=VARCHAR},
+		</if>
+		<if test="block_topic != null">
+			block_topic = #{block_topic,jdbcType=VARCHAR},
+		</if>
+		<if test="block_is_original != null">
+			block_is_original = #{block_is_original,jdbcType=CHAR},
+		</if>
+		mtime = now()
+	</insert>
+	
+</mapper>
